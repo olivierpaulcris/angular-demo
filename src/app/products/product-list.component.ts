@@ -1,16 +1,30 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { IProduct } from "../models/product";
 
 @Component({
     selector: 'pm-products',
-    templateUrl: './product-list.component.html'
+    templateUrl: './product-list.component.html',
+    styleUrls: ['./product-list.component.scss']
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit {
     pageTitle: string = 'Product List';
     imageWidth: number = 100;
     imageMargin: number = 2;
-    showImage: boolean = false;
-    listFilter: string = 'cart';
-    products: any[] = [
+    showImage: boolean = true;
+
+    // listFilter: string = 'cart';
+    private _listFilter: string = '';
+    get listFilter(): string {
+        return this._listFilter;
+    }
+    set listFilter(value: string) {
+        this._listFilter = value;
+        console.log('In setter:', this._listFilter)
+        this.filteredProducts = this.performFilter(value);
+    }
+
+    filteredProducts: IProduct[] = [];
+    products: IProduct[] = [
         {
             "productId": 2,
             "productName": "Combo  Marsh Mallows",
@@ -18,7 +32,7 @@ export class ProductListComponent {
             "releaseDate": "March 18, 2021",
             "description": "Acme Products",
             "price": 32.99,
-            "startRating": 4.2,
+            "starRating": 4.2,
             "imageUrl": "https://m.media-amazon.com/images/I/41rBSsxxIwL.jpg"
         },
         {
@@ -28,12 +42,26 @@ export class ProductListComponent {
             "releaseDate": "March 18, 2021",
             "description": "Acme Products",
             "price": 50.23,
-            "startRating": 3.8,
+            "starRating": 2.1,
             "imageUrl": "https://5.imimg.com/data5/SELLER/Default/2020/11/NU/WU/DA/8735450/81qqdq8ksgl-sl1500--250x250.jpg"
         },
-    ]
+    ];
 
-    toggleImage() {
+    performFilter(filterBy: string): IProduct[] {
+        filterBy = filterBy.toLocaleLowerCase();
+        return this.products.filter((product: IProduct) =>
+            product.productName.toLocaleLowerCase().includes(filterBy));
+    }
+
+    toggleImage(): void {
         this.showImage = !this.showImage;
+    }
+
+    ngOnInit(): void {
+        this.filteredProducts = this.products;
+    }
+
+    onRatingClicked(message: string): void {
+        this.pageTitle = 'Product List: ' + message;
     }
 }
