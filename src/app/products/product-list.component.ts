@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { IProduct } from "../models/product";
+import { ProductService } from "../services/product.service";
 
 @Component({
     selector: 'pm-products',
@@ -11,41 +12,24 @@ export class ProductListComponent implements OnInit {
     imageWidth: number = 100;
     imageMargin: number = 2;
     showImage: boolean = true;
+    filteredProducts: IProduct[] = [];
+    products: IProduct[] = [];
+
+    constructor(
+        private productService: ProductService
+    ) { }
 
     // listFilter: string = 'cart';
     private _listFilter: string = '';
+
     get listFilter(): string {
         return this._listFilter;
     }
+
     set listFilter(value: string) {
         this._listFilter = value;
-        console.log('In setter:', this._listFilter)
         this.filteredProducts = this.performFilter(value);
     }
-
-    filteredProducts: IProduct[] = [];
-    products: IProduct[] = [
-        {
-            "productId": 2,
-            "productName": "Combo  Marsh Mallows",
-            "productCode": "GDN-0023",
-            "releaseDate": "March 18, 2021",
-            "description": "Acme Products",
-            "price": 32.99,
-            "starRating": 4.2,
-            "imageUrl": "https://m.media-amazon.com/images/I/41rBSsxxIwL.jpg"
-        },
-        {
-            "productId": 3,
-            "productName": "Strawberry Marsh Mallows",
-            "productCode": "GDN-0023",
-            "releaseDate": "March 18, 2021",
-            "description": "Acme Products",
-            "price": 50.23,
-            "starRating": 2.1,
-            "imageUrl": "https://5.imimg.com/data5/SELLER/Default/2020/11/NU/WU/DA/8735450/81qqdq8ksgl-sl1500--250x250.jpg"
-        },
-    ];
 
     performFilter(filterBy: string): IProduct[] {
         filterBy = filterBy.toLocaleLowerCase();
@@ -58,6 +42,7 @@ export class ProductListComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.products = this.productService.getProducts();
         this.filteredProducts = this.products;
     }
 
