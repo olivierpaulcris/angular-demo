@@ -11,7 +11,8 @@ import { Component } from '@angular/core';
     </ul>
   </nav>
   <router-outlet></router-outlet>
-  `
+  `,
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   pageTitle = 'Acme Product Management';

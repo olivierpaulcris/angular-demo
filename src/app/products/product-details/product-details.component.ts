@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IProduct } from '../models/product';
+import { IProduct } from 'src/app/models/product';
 
 @Component({
-  templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.scss']
+  templateUrl: './product-details.component.html',
+  styleUrls: ['./product-details.component.scss']
 })
-export class ProductDetailComponent implements OnInit {
+export class ProductDetailsComponent implements OnInit {
 
   public pageTitle: string = 'Product Detail';
   public product = {
