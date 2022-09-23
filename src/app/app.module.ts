@@ -5,9 +5,9 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { HomeModule } from './home/home.module';
-import { HomeComponent } from './home/home/home.component';
-import { ProductsModule } from './products/products.module';
+import { HomeModule } from './modules/home/home.module';
+import { HomeComponent } from './modules/home/home/home.component';
+import { ProductsModule } from './modules/products/products.module';
 
 @NgModule({
   declarations: [
