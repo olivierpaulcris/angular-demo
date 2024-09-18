@@ -1,4 +1,4 @@
-# angularDemo
+# Angular Demo
 
 ![angularDemo](./screenshot.png)
 
