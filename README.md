@@ -4,7 +4,7 @@
 
 ## Description
 
-Angular demo.
+Angular demo, developed in 2022.
 
 ## Index
 
